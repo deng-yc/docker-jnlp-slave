@@ -26,4 +26,10 @@ LABEL Description="This is a base image, which allows connecting Jenkins agents 
 
 COPY jenkins-slave /usr/local/bin/jenkins-slave
 
+ARG dockerGid=999
+
+RUN echo "docker:x:${dockerGid}:jenkins" >> /etc/group
+
+USER jenkins
+
 ENTRYPOINT ["jenkins-slave"]
