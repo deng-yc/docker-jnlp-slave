@@ -24,12 +24,9 @@ FROM jenkins/slave:3.16-1
 MAINTAINER Oleg Nenashev <o.v.nenashev@gmail.com>
 LABEL Description="This is a base image, which allows connecting Jenkins agents via JNLP protocols" Vendor="Jenkins project" Version="3.16"
 
-COPY jenkins-slave /usr/local/bin/jenkins-slave
-
 ARG dockerGid=999
-
 RUN echo "docker:x:${dockerGid}:jenkins" >> /etc/group
 
+COPY jenkins-slave /usr/local/bin/jenkins-slave
 USER jenkins
-
 ENTRYPOINT ["jenkins-slave"]
